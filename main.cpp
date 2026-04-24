@@ -1,5 +1,5 @@
 #include <iostream>
-class Transport()
+class Transport
 {
 private:
         std::string typeOfFuel;
@@ -8,7 +8,31 @@ private:
 public:
         virtual std::string getTypeOfFuel(){return typeOfFuel}
         virtual double getAmountOfFuel(){return amountOfFuel}
-        virtual double getSpeed(){return speed}
+        virtual double getSpeed(){return speed}        
 
-        
+        virtual ~Transport() {}
 }
+
+class RoadTransport: public Transport
+{
+private:
+        int numberOfTires;
+        int numberOfPassengers;
+private:
+             
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
