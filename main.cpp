@@ -10,7 +10,7 @@ public:
         double getAmountOfFuel(){return amountOfFuel;}
         double getSpeed(){return speed;}        
 
-         ~Transport() {}
+        //virtual ~Transport() {}
 };
 
 class RoadTransport: public Transport
@@ -29,7 +29,17 @@ private:
 
 public:
         virtual void honk(){std::cout<<"Car honks"<<std::endl;}
+        virtual ~Car(){}
 };
+class Toyota: public Car
+{
+private:
+
+public:
+        void honk(){std::cout<<"Toyota honks"<<std::endl;}
+}
+
+
 
 
 
