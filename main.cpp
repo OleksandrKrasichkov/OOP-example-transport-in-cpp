@@ -23,6 +23,14 @@ private:
         int getNumberOfPassengers(){return nymberOfPassengers;}
 };
 
+class Car: public RoadTransport
+{
+private:
+
+public:
+        virtual void honk(){std::cout<<"Car honks"<<std::endl;}
+};
+
 
 
 
