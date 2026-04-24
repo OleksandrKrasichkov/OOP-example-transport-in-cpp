@@ -20,7 +20,7 @@ private:
         int numberOfPassengers;
 private:
         int getNumberOfTires(){return numberOfTires;}             
-        int getNumberOfPassengers(){return nymberOfPassengers;}
+        int getNumberOfPassengers(){return numberOfPassengers;}
 };
 
 class Car: public RoadTransport
@@ -37,9 +37,15 @@ private:
 
 public:
         void honk(){std::cout<<"Toyota honks"<<std::endl;}
+};
+
+
+int main()
+{
+Car *tayota = new Toyota();
+(*tayota).honk();
+return 0;
 }
-
-
 
 
 
