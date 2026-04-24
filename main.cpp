@@ -5,22 +5,29 @@ private:
         std::string typeOfFuel;
         double amountOfFuel;
         double maxSpeed;        
+        int numberOfPassengers;
 public:
+        Transport(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
+        int numberOfPassengers_)
+        :typeOfFuel(typeOfFuel_),amountOfFuel(amountOfFuel_),maxSpeed(maxSpeed_),
+        numberOfPassengers(numberOfPassengers_){}
+
         std::string getTypeOfFuel(){return typeOfFuel;}
         double getAmountOfFuel(){return amountOfFuel;}
-        double getSpeed(){return speed;}        
+        double getMaxSpeed(){return maxSpeed;}  
+        int getNumberOfPassengers(){return numberOfPassengers;}
 
-        //virtual ~Transport() {}
 };
 
 class RoadTransport: public Transport
 {
 private:
         int numberOfTires;
-        int numberOfPassengers;
 private:
+        RoadTransport(int numberOfTires_)
+        :numberofTires(numberOfTires_){}
+
         int getNumberOfTires(){return numberOfTires;}             
-        int getNumberOfPassengers(){return numberOfPassengers;}
 };
 
 class Car: public RoadTransport
@@ -28,8 +35,6 @@ class Car: public RoadTransport
 private:
 
 public:
-        Car(float maxSpeed_):maxSpeed(maxSpeed_){}
-
         virtual void honk(){std::cout<<"Car honks"<<std::endl;}
         virtual ~Car(){}
 };
