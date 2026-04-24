@@ -23,9 +23,14 @@ class RoadTransport: public Transport
 {
 private:
         int numberOfTires;
-private:
-        RoadTransport(int numberOfTires_)
-        :numberofTires(numberOfTires_){}
+public:
+        RoadTransport(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
+        int numberOfPassengers_, int numberOfTires_)
+        :Transport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_),
+        numberOfTires(numberOfTires_){}
+
+       // RoadTransport(int numberOfTires_)
+       //:numberOfTires(numberOfTires_){}
 
         int getNumberOfTires(){return numberOfTires;}             
 };
@@ -35,6 +40,11 @@ class Car: public RoadTransport
 private:
 
 public:
+        Car(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
+        int numberOfPassengers_, int numberOfTires_)
+        :RoadTransport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
+        numberOfTires_){}
+
         virtual void honk(){std::cout<<"Car honks"<<std::endl;}
         virtual ~Car(){}
 };
@@ -45,13 +55,11 @@ private:
 public:
         
         Toyota()
-        :typeOfFuel("None"),amountOfFuel(0),Car(0),numberOfTires(0),
-        numberOfPassengers(0) {}
+        :Car("None",0,0,0,0){}
         Toyota(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
-        int numberOfTires_, int numberOfPassengers_)
-        :typeOfFuel(typeOfFuel_),amountOfFuel(amountOfFuel_),
-        Car(maxSpeed_),numberOfTires(numberOfTires_),
-        numberOfPassengers(numberOfPassengers_){}
+        int numberOfPassengers_, int numberOfTires_)
+        :Car(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
+        numberOfTires_){}
         void honk(){std::cout<<"Toyota honks"<<std::endl;}
 };
 
