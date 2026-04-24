@@ -6,11 +6,11 @@ private:
         double amountOfFuel;
         double speed;        
 public:
-        virtual std::string getTypeOfFuel(){return typeOfFuel;}
-        virtual double getAmountOfFuel(){return amountOfFuel;}
-        virtual double getSpeed(){return speed;}        
+        std::string getTypeOfFuel(){return typeOfFuel;}
+        double getAmountOfFuel(){return amountOfFuel;}
+        double getSpeed(){return speed;}        
 
-        virtual ~Transport() {}
+         ~Transport() {}
 };
 
 class RoadTransport: public Transport
@@ -19,8 +19,8 @@ private:
         int numberOfTires;
         int numberOfPassengers;
 private:
-        virtual int getNumberOfTires(){return numberOfTires;}             
-        virtual int getNumberOfPassengers(){return nymberOfPassengers;}
+        int getNumberOfTires(){return numberOfTires;}             
+        int getNumberOfPassengers(){return nymberOfPassengers;}
 };
 
 
