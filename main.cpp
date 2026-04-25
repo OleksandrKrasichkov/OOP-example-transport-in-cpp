@@ -12,10 +12,10 @@ public:
         :typeOfFuel(typeOfFuel_),amountOfFuel(amountOfFuel_),maxSpeed(maxSpeed_),
         numberOfPassengers(numberOfPassengers_){}
 
-        std::string getTypeOfFuel(){return typeOfFuel;}
-        double getAmountOfFuel(){return amountOfFuel;}
-        double getMaxSpeed(){return maxSpeed;}  
-        int getNumberOfPassengers(){return numberOfPassengers;}
+        std::string getTypeOfFuel() const {return typeOfFuel;}
+        double getAmountOfFuel() const {return amountOfFuel;}
+        double getMaxSpeed() const {return maxSpeed;}  
+        int getNumberOfPassengers() const {return numberOfPassengers;}
 
 };
 
@@ -29,7 +29,7 @@ public:
         :Transport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_),
         numberOfTires(numberOfTires_){}
 
-        int getNumberOfTires(){return numberOfTires;}             
+        int getNumberOfTires() const {return numberOfTires;}             
 };
 
 class AirTransport: public Transport
@@ -42,7 +42,7 @@ public:
         :Transport("Kerosene",amountOfFuel_, maxSpeed_,numberOfPassengers_),
         numberOfPilots(numberOfPilots_) {}
         
-        int getNumberOfPilots(){return numberOfPilots;}      
+        int getNumberOfPilots() const {return numberOfPilots;}      
 };
 
 class Car: public RoadTransport
@@ -78,7 +78,7 @@ public:
         Toyota(std::string typeOfFuel_="Gasoline", double amountOfFuel_=50,
         double maxSpeed_=180)
         :Car(typeOfFuel_,amountOfFuel_,maxSpeed_,4){}
-        void honk(){std::cout<<"Toyota honks"<<std::endl;}
+        void honk() const {std::cout<<"Toyota honks"<<std::endl;}
 };
 
 
