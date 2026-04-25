@@ -145,10 +145,9 @@ public:
 
 
 
-//double hoursBeforeEmpty(Car car)
-//{
+double hoursBeforeEmpty(const Transport &);
         
-//}
+
 
 
 
@@ -160,6 +159,7 @@ Car *tayota = new Toyota();
 (*tayota).honk();
 std::cout<<(*tayota).getNumberOfTires();
 tayota->setTypeOfFuel("Keosene");
+std::cout<<hoursBeforeEmpty(*tayota);
 std::cout<<tayota->getTypeOfFuel();
 delete tayota;
 return 0;
@@ -169,7 +169,10 @@ return 0;
 
 
 
-
+double hoursBeforeEmpty(const Transport &t)
+{
+        return t.getAmountOfFuel() / t.getLitersPerHour();
+}
 
 
 
