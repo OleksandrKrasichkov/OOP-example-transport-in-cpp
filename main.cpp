@@ -67,7 +67,14 @@ public:
                         numberOfPassengers = numberOfPassengers_;
                 }else {std::cout<<"Too few passengers"<<std::endl;}
         }
+        
+        double moneyPerTime(double time)
+        {
+                return ((time * litersPerHour) * fuelPrices[typeOfFuel]);
+        }
 
+        virtual void move() const {std::cout<<"Transport moves."<<std::endl;}
+        virtual ~Transport(){}
 };
 
 class RoadTransport: public Transport
@@ -124,8 +131,9 @@ public:
         :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
         maxSpeed_, numberOfPassengers_,4){}
 
-        virtual void honk() const {std::cout<<"Car honks"<<std::endl;}
-        virtual ~Car(){}
+        void move() const {std::cout<<"Car moves."<<std::endl;}
+        void honk() const {std::cout<<"Car honks"<<std::endl;}
+
 };
 class Jet: public AirTransport
 {
@@ -137,6 +145,7 @@ public:
         :AirTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
         numberOfPassengers_, numberOfPilots_){}
 
+        virtual void move() const {std::cout<<"Jet moves."<<std::endl;}
 };
 class Toyota: public Car
 {
@@ -164,12 +173,23 @@ double hoursBeforeEmpty(const Transport &);
 
 int main()
 {
+Transport *t = new Jet();
+Transport *t2 = new Toyota();
 Car *tayota = new Toyota();
 (*tayota).honk();
 std::cout<<(*tayota).getNumberOfTires();
 tayota->setTypeOfFuel("Keosene");
 std::cout<<hoursBeforeEmpty(*tayota);
 std::cout<<tayota->getTypeOfFuel();
+std::cout<<tayota->moneyPerTime(100)<<std::endl;
+
+std::cout<<t->moneyPerTime(100)<<std::endl;
+std::cout<<t2->moneyPerTime(100)<<std::endl;
+
+t->move();
+t2->move();
+
+delete t; delete t2;
 delete tayota;
 return 0;
 }
