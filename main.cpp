@@ -51,9 +51,8 @@ private:
 
 public:
         Car(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
-        int numberOfPassengers_, int numberOfTires_)
-        :RoadTransport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
-        numberOfTires_){}
+        int numberOfPassengers_)
+        :RoadTransport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,4){}
 
         virtual void honk(){std::cout<<"Car honks"<<std::endl;}
         virtual ~Car(){}
@@ -62,8 +61,8 @@ class Jet: public AirTransport
 {
 private:
 public:
-        Jet(double amountOfFuel_,double maxSpeed_, int numberOfPassengers_,
-        int numberOfPilots_)
+        Jet(double amountOfFuel_=3000,double maxSpeed_=1200,
+        int numberOfPassengers_=8,int numberOfPilots_=2)
         :AirTransport(amountOfFuel_, maxSpeed_, numberOfPassengers_, numberOfPilots_)
         {}
 
@@ -74,12 +73,11 @@ private:
 
 public:
         
-        Toyota()
-        :Car("None",0,0,0,0){}
-        Toyota(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
-        int numberOfPassengers_, int numberOfTires_)
-        :Car(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
-        numberOfTires_){}
+        //Toyota()
+        //:Car("None",0,0,0,0){}
+        Toyota(std::string typeOfFuel_="Gasoline", double amountOfFuel_=50,
+        double maxSpeed_=180)
+        :Car(typeOfFuel_,amountOfFuel_,maxSpeed_,4){}
         void honk(){std::cout<<"Toyota honks"<<std::endl;}
 };
 
