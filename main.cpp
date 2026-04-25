@@ -35,14 +35,14 @@ public:
 class AirTransport: public Transport
 {
 private:
-        int amountOfPilots;
+        int numberOfPilots;
 public:
         AirTransport(double amountOfFuel_, float maxSpeed_,int numberOfPassengers_,
-        int numberOfTires_, int amountOfPilots_)
+        int numberOfPilots_)
         :Transport("Kerosene",amountOfFuel_, maxSpeed_,numberOfPassengers_),
-        amountOfPilots(amountOfPilots_) {}
+        numberOfPilots(numberOfPilots_) {}
         
-        int getAmountOfPilots(){return amountOfPilots;}      
+        int getNumberOfPilots(){return numberOfPilots;}      
 };
 
 class Car: public RoadTransport
@@ -60,6 +60,12 @@ public:
 };
 class Jet: public AirTransport
 {
+private:
+public:
+        Jet(double amountOfFuel_,double maxSpeed_, int numberOfPassengers_,
+        int numberOfPilots_)
+        :AirTransport(amountOfFuel_, maxSpeed_, numberOfPassengers_, numberOfPilots_)
+        {}
 
 };
 class Toyota: public Car
