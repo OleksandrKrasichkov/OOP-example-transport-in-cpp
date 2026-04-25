@@ -24,15 +24,25 @@ class RoadTransport: public Transport
 private:
         int numberOfTires;
 public:
-        RoadTransport(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
+        RoadTransport(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
         int numberOfPassengers_, int numberOfTires_)
         :Transport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_),
         numberOfTires(numberOfTires_){}
 
-       // RoadTransport(int numberOfTires_)
-       //:numberOfTires(numberOfTires_){}
-
         int getNumberOfTires(){return numberOfTires;}             
+};
+
+class AirTransport: public Transport
+{
+private:
+        int amountOfPilots;
+public:
+        AirTransport(double amountOfFuel_, float maxSpeed_,int numberOfPassengers_,
+        int numberOfTires_, int amountOfPilots_)
+        :Transport("Kerosene",amountOfFuel_, maxSpeed_,numberOfPassengers_),
+        amountOfPilots(amountOfPilots_) {}
+        
+        int getAmountOfPilots(){return amountOfPilots;}      
 };
 
 class Car: public RoadTransport
@@ -40,13 +50,17 @@ class Car: public RoadTransport
 private:
 
 public:
-        Car(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
+        Car(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
         int numberOfPassengers_, int numberOfTires_)
         :RoadTransport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
         numberOfTires_){}
 
         virtual void honk(){std::cout<<"Car honks"<<std::endl;}
         virtual ~Car(){}
+};
+class Jet: public AirTransport
+{
+
 };
 class Toyota: public Car
 {
@@ -56,7 +70,7 @@ public:
         
         Toyota()
         :Car("None",0,0,0,0){}
-        Toyota(std::string typeOfFuel_, double amountOfFuel_, float maxSpeed_,
+        Toyota(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
         int numberOfPassengers_, int numberOfTires_)
         :Car(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,
         numberOfTires_){}
@@ -68,6 +82,7 @@ int main()
 {
 Car *tayota = new Toyota();
 (*tayota).honk();
+std::cout<<(*tayota).getNumberOfTires();
 return 0;
 }
 
