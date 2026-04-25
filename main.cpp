@@ -131,7 +131,7 @@ public:
         :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
         maxSpeed_, numberOfPassengers_,4){}
 
-        void move() const {std::cout<<"Car moves."<<std::endl;}
+        void move() const override {std::cout<<"Car moves."<<std::endl;}
         void honk() const {std::cout<<"Car honks"<<std::endl;}
 
 };
@@ -145,7 +145,7 @@ public:
         :AirTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
         numberOfPassengers_, numberOfPilots_){}
 
-        virtual void move() const {std::cout<<"Jet moves."<<std::endl;}
+        void move() const override {std::cout<<"Jet moves."<<std::endl;}
 };
 class Toyota: public Car
 {
