@@ -26,6 +26,28 @@ public:
                 if(std::find(allowedFuel.begin(),allowedFuel.end(),typeOfFuel_)
                 != allowedFuel.end())
                 {typeOfFuel = typeOfFuel_;}
+                else{std::cout<<"This type of fuel doesn't exist."<<std::endl;}
+        }
+        void setAmountOfFuel(double amountOfFuel_)
+        {
+                if(amountOfFuel_ >= 0)
+                {
+                        amountOfFuel = amountOfFuel_;
+                }else {std::cout<<"Too little fuel."<<std::endl;}
+        }
+        void setMaxSpeed(double maxSpeed_)
+        {
+                if(maxSpeed_ >= 0)
+                {
+                        maxSpeed = maxSpeed_;  
+                }else {std::cout<<"Too slow"<<std::endl;}      
+        }
+        void setNumberOfPassengers( int numberOfPassengers_)
+        {
+                if(numberOfPassengers_ >= 0)
+                {
+                        numberOfPassengers = numberOfPassengers_;
+                }else {std::cout<<"Too few passengers"<<std::endl;}
         }
 };
 
@@ -95,7 +117,7 @@ int main()
 Car *tayota = new Toyota();
 (*tayota).honk();
 std::cout<<(*tayota).getNumberOfTires();
-tayota->setTypeOfFuel("Kerosene");
+tayota->setTypeOfFuel("Keosene");
 std::cout<<tayota->getTypeOfFuel();
 delete tayota;
 return 0;
