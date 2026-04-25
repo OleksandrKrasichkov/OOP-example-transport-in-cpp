@@ -62,6 +62,13 @@ public:
         numberOfTires(numberOfTires_){}
 
         int getNumberOfTires() const {return numberOfTires;}             
+
+        void setNumberOfTires(int numberOfTires_)
+        {
+                if(numberOfTires_ >= 0)
+                {numberOfTires = numberOfTires_;}
+                else{std::cout<<"Too few tires"<<std::endl;}
+        }
 };
 
 class AirTransport: public Transport
@@ -74,7 +81,14 @@ public:
         :Transport("Kerosene",amountOfFuel_, maxSpeed_,numberOfPassengers_),
         numberOfPilots(numberOfPilots_) {}
         
-        int getNumberOfPilots() const {return numberOfPilots;}      
+        int getNumberOfPilots() const {return numberOfPilots;}
+        
+        void setNumberOfPilots(int numberOfPilots_)
+        {
+                if(numberOfPilots_ >= 0) 
+                {numberOfPilots = numberOfPilots_;}
+                else{std::cout<<"Too few pilots"<<std::endl;}
+        }      
 };
 
 class Car: public RoadTransport
