@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 class Transport
 {
 private:
@@ -6,6 +8,8 @@ private:
         double amountOfFuel;
         double maxSpeed;        
         int numberOfPassengers;
+        std::vector<std::string> allowedFuel = 
+        {"Gasoline","Diesel","Electric","Kerosene"};
 public:
         Transport(std::string typeOfFuel_, double amountOfFuel_, double maxSpeed_,
         int numberOfPassengers_)
@@ -17,6 +21,12 @@ public:
         double getMaxSpeed() const {return maxSpeed;}  
         int getNumberOfPassengers() const {return numberOfPassengers;}
 
+        void setTypeOfFuel(std::string typeOfFuel_)
+        {
+                if(std::find(allowedFuel.begin(),allowedFuel.end(),typeOfFuel_)
+                != allowedFuel.end())
+                {typeOfFuel = typeOfFuel_;}
+        }
 };
 
 class RoadTransport: public Transport
@@ -54,7 +64,7 @@ public:
         int numberOfPassengers_)
         :RoadTransport(typeOfFuel_,amountOfFuel_,maxSpeed_, numberOfPassengers_,4){}
 
-        virtual void honk(){std::cout<<"Car honks"<<std::endl;}
+        virtual void honk() const {std::cout<<"Car honks"<<std::endl;}
         virtual ~Car(){}
 };
 class Jet: public AirTransport
@@ -73,8 +83,6 @@ private:
 
 public:
         
-        //Toyota()
-        //:Car("None",0,0,0,0){}
         Toyota(std::string typeOfFuel_="Gasoline", double amountOfFuel_=50,
         double maxSpeed_=180)
         :Car(typeOfFuel_,amountOfFuel_,maxSpeed_,4){}
@@ -87,6 +95,9 @@ int main()
 Car *tayota = new Toyota();
 (*tayota).honk();
 std::cout<<(*tayota).getNumberOfTires();
+tayota->setTypeOfFuel("Kerosene");
+std::cout<<tayota->getTypeOfFuel();
+delete tayota;
 return 0;
 }
 
