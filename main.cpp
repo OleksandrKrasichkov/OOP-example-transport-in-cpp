@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
+
 class Transport
 {
 private:
@@ -11,6 +13,13 @@ private:
         int numberOfPassengers;
         std::vector<std::string> allowedFuel = 
         {"Gasoline","Diesel","Electric","Kerosene"};
+        std::unordered_map<std::string, double> fuelPrices =
+        {
+                {"Gasoline", 3},
+                {"Diesel", 3.5},
+                {"Electric", 1.3},
+                {"Kerosene", 2}
+        };
 public:
         Transport(std::string typeOfFuel_, double amountOfFuel_,
         double litersPerHour_, double maxSpeed_,int numberOfPassengers_)
