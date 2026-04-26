@@ -17,7 +17,7 @@ private:
         {
                 {"Gasoline", 3},
                 {"Diesel", 3.5},
-                {"Electric", 1.3},
+                {"Electric", 1.1},
                 {"Kerosene", 2}
         };
 public:
@@ -32,7 +32,8 @@ public:
         double getLitersPerHour() const {return litersPerHour;}
         double getMaxSpeed() const {return maxSpeed;}  
         int getNumberOfPassengers() const {return numberOfPassengers;}
-
+        double getFuelPrice(std::string type) const
+        {return fuelPrices.at(type);}
         void setTypeOfFuel(std::string typeOfFuel_)
         {
                 if(std::find(allowedFuel.begin(),allowedFuel.end(),typeOfFuel_)
@@ -68,9 +69,9 @@ public:
                 }else {std::cout<<"Too few passengers"<<std::endl;}
         }
         
-        double moneyPerTime(double time)
+        virtual double moneyPerTime (double time) const
         {
-                return ((time * litersPerHour) * fuelPrices[typeOfFuel]);
+                return ((time * litersPerHour) * fuelPrices.at(typeOfFuel));
         }
 
         virtual void move() const {std::cout<<"Transport moves."<<std::endl;}
@@ -131,9 +132,9 @@ public:
         :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
         maxSpeed_, numberOfPassengers_,4){}
 
-        void move() const override {std::cout<<"Car moves."<<std::endl;}
-        void honk() const {std::cout<<"Car honks"<<std::endl;}
-
+        void move() const override {std::cout<<"Car drives 🚗"<<std::endl;}
+        
+        virtual void honk() const {std::cout<<"Car honks."<<std::endl;}
 };
 class Jet: public AirTransport
 {
@@ -144,8 +145,8 @@ public:
         int numberOfPassengers_=8,int numberOfPilots_=2)
         :AirTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
         numberOfPassengers_, numberOfPilots_){}
-
-        void move() const override {std::cout<<"Jet moves."<<std::endl;}
+        
+        void move() const override {std::cout<<"Jet flies 🛩️"<<std::endl;}
 };
 class Toyota: public Car
 {
@@ -156,8 +157,26 @@ public:
         Toyota(std::string typeOfFuel_="Gasoline",
         double amountOfFuel_=50,double litersPerHour_=8, double maxSpeed_=180)
         :Car(typeOfFuel_,amountOfFuel_,litersPerHour_, maxSpeed_,4){}
-        void honk() const {std::cout<<"Toyota honks"<<std::endl;}
+        void honk() const override {std::cout<<"Toyota honks"<<std::endl;}
 };
+class Tesla: public Car
+{
+private:
+        double batteryCapacity;
+        double kWPerHour;
+public:
+        Tesla(double batteryCapacity_=80, double kWPerHour_=18, double maxSpeed_=300)
+        :Car("Electric",0,0,maxSpeed_,4),//type,amount,lph,maxsp,passsengers
+        batteryCapacity(batteryCapacity_),kWPerHour(kWPerHour_){}
+
+        double getBatteryCapacity() const {return batteryCapacity;}
+        double getKWPerHour() const {return kWPerHour;}
+
+        void honk() const override {std::cout<<"Tesla HONKS!"<<std::endl;}
+        double moneyPerTime(double time) const override
+        {return ((time * kWPerHour) * getFuelPrice(getTypeOfFuel()));}
+};
+               
 
 
 
@@ -175,8 +194,9 @@ int main()
 {
 Transport *t = new Jet();
 Transport *t2 = new Toyota();
+Transport *t3 = new Tesla();
+Car *t4 = new Tesla();
 Car *tayota = new Toyota();
-(*tayota).honk();
 std::cout<<(*tayota).getNumberOfTires();
 tayota->setTypeOfFuel("Keosene");
 std::cout<<hoursBeforeEmpty(*tayota);
@@ -188,8 +208,9 @@ std::cout<<t2->moneyPerTime(100)<<std::endl;
 
 t->move();
 t2->move();
-
-delete t; delete t2;
+std::cout<<t3->moneyPerTime(100)<<std::endl;
+t4->honk();std::cout<<t4->moneyPerTime(100)<<std::endl;
+delete t; delete t2; delete t3; delete t4;
 delete tayota;
 return 0;
 }
