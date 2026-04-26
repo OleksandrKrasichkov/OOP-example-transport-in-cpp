@@ -132,19 +132,21 @@ public:
         :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
         maxSpeed_, numberOfPassengers_,4){}
 
-
-        virtual double getBatteryCapacity() const {return -1;}
-        virtual double getKWPerHour() const {return -1;}
+        virtual bool isElectric() const {return false;}
+        virtual double getBatteryCapacity() const 
+        {throw std::runtime_error("Not an electric car.");}
+        virtual double getKWPerHour() const
+        {throw std::runtime_error("Not an electric car.");}
 
 
         void move() const override {std::cout<<"Car drives 🚗"<<std::endl;}
         
         virtual void honk() const {std::cout<<"Car honks."<<std::endl;}
         virtual void setBatteryCapacity(double num)
-        {std::cout<<"There is no battery."<<std::endl;}
+        {throw std::runtime_error("There is no battery.");}
 
         virtual void setKWPerHour(double num)
-        {std::cout<<"This car doesn't run on electricity."<<std::endl;}
+        {throw std::runtime_error("This car doesn't run on electricity.");}
 
         virtual ~Car() {}
 };
@@ -184,6 +186,7 @@ public:
         double getBatteryCapacity() const override {return batteryCapacity;}
         double getKWPerHour() const override {return kWPerHour;}
 
+        bool isElectric() const override {return true;}
         void honk() const override {std::cout<<"Tesla HONKS!"<<std::endl;}
         double moneyPerTime(double time) const override
         {return ((time * kWPerHour) * getFuelPrice(getTypeOfFuel()));}
