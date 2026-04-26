@@ -21,6 +21,7 @@ void test_Toyota()
 int main()
 {
         test_Toyota();
+        Toyota t3("kaka");
 return 0;
 }
 

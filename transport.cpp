@@ -24,9 +24,13 @@ private:
 public:
         Transport(std::string typeOfFuel_, double amountOfFuel_,
         double litersPerHour_, double maxSpeed_,int numberOfPassengers_)
-        :typeOfFuel(typeOfFuel_),amountOfFuel(amountOfFuel_),
-        litersPerHour(litersPerHour_), maxSpeed(maxSpeed_),
-        numberOfPassengers(numberOfPassengers_){}
+        {
+                setTypeOfFuel(typeOfFuel_);
+                setAmountOfFuel(amountOfFuel_);
+                setLitersPerHour(litersPerHour_);
+                setMaxSpeed(maxSpeed_);
+                setNumberOfPassengers(numberOfPassengers_);
+        }
 
         std::string getTypeOfFuel() const {return typeOfFuel;}
         double getAmountOfFuel() const {return amountOfFuel;}
@@ -88,8 +92,10 @@ public:
         double litersPerHour_, double maxSpeed_,
         int numberOfPassengers_, int numberOfTires_)
         :Transport(typeOfFuel_,amountOfFuel_,litersPerHour_,
-        maxSpeed_, numberOfPassengers_),
-        numberOfTires(numberOfTires_){}
+        maxSpeed_, numberOfPassengers_)
+        {
+                setNumberOfTires(numberOfTires_);
+        }
 
         int getNumberOfTires() const {return numberOfTires;}             
 
@@ -110,8 +116,10 @@ public:
         double maxSpeed_,int numberOfPassengers_,
         int numberOfPilots_)
         :Transport("Kerosene",amountOfFuel_, litersPerHour_, maxSpeed_,
-        numberOfPassengers_),
-        numberOfPilots(numberOfPilots_) {}
+        numberOfPassengers_)
+        {
+                setNumberOfPilots(numberOfPilots_);
+        }
         
         int getNumberOfPilots() const {return numberOfPilots;}
         
@@ -181,8 +189,11 @@ private:
         double kWPerHour;
 public:
         Tesla(double batteryCapacity_=80, double kWPerHour_=18, double maxSpeed_=300)
-        :Car("Electric",0,0,maxSpeed_,4),//type,amount,lph,maxsp,passsengers
-        batteryCapacity(batteryCapacity_),kWPerHour(kWPerHour_){}
+        :Car("Electric",0,0,maxSpeed_,4)//type,amount,lph,maxsp,passsengers
+        {
+                setBatteryCapacity(batteryCapacity_);
+                setKWPerHour(kWPerHour_);
+        }
 
         double getBatteryCapacity() const override {return batteryCapacity;}
         double getKWPerHour() const override {return kWPerHour;}
