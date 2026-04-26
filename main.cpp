@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <stdexcept>
 
 class Transport
 {
@@ -218,6 +219,20 @@ double hoursBeforeEmpty(const Transport &);
 
 int main()
 {
+        std::vector<Car *> garage = {};
+        Car *t1 = new Toyota();
+        Car *te1 = new Tesla();
+        garage.insert(garage.end(), {t1, te1});
+        for(int i = 0; i < garage.size(); ++i)
+        {garage[i]->honk();}
+
+        delete t1; delete te1;
+        
+
+
+
+
+        /*
 Transport *t = new Jet();
 Transport *t2 = new Toyota();
 Transport *t3 = new Tesla();
@@ -240,6 +255,8 @@ t4->setBatteryCapacity(1000); std::cout<<t4->getBatteryCapacity();
 std::cout<<tayota->getBatteryCapacity();
 delete t; delete t2; delete t3; delete t4;
 delete tayota;
+*/
+
 return 0;
 }
 
