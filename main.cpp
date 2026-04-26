@@ -132,9 +132,21 @@ public:
         :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
         maxSpeed_, numberOfPassengers_,4){}
 
+
+        virtual double getBatteryCapacity() const {return -1;}
+        virtual double getKWPerHour() const {return -1;}
+
+
         void move() const override {std::cout<<"Car drives 🚗"<<std::endl;}
         
         virtual void honk() const {std::cout<<"Car honks."<<std::endl;}
+        virtual void setBatteryCapacity(double num)
+        {std::cout<<"There is no battery."<<std::endl;}
+
+        virtual void setKWPerHour(double num)
+        {std::cout<<"This car doesn't run on electricity."<<std::endl;}
+
+        virtual ~Car() {}
 };
 class Jet: public AirTransport
 {
@@ -169,12 +181,23 @@ public:
         :Car("Electric",0,0,maxSpeed_,4),//type,amount,lph,maxsp,passsengers
         batteryCapacity(batteryCapacity_),kWPerHour(kWPerHour_){}
 
-        double getBatteryCapacity() const {return batteryCapacity;}
-        double getKWPerHour() const {return kWPerHour;}
+        double getBatteryCapacity() const override {return batteryCapacity;}
+        double getKWPerHour() const override {return kWPerHour;}
 
         void honk() const override {std::cout<<"Tesla HONKS!"<<std::endl;}
         double moneyPerTime(double time) const override
         {return ((time * kWPerHour) * getFuelPrice(getTypeOfFuel()));}
+        void setBatteryCapacity(double num) override
+        {
+                if(num>=0){batteryCapacity = num;}
+                else{std::cout<<"Too low battery capacity."<<std::endl;}
+        }
+
+        void setKWPerHour(double num) override
+        {
+                if(num>=0){kWPerHour = num;}
+                else{std::cout<<"Too low consumption."<<std::endl;}
+        }
 };
                
 
@@ -210,6 +233,8 @@ t->move();
 t2->move();
 std::cout<<t3->moneyPerTime(100)<<std::endl;
 t4->honk();std::cout<<t4->moneyPerTime(100)<<std::endl;
+t4->setBatteryCapacity(1000); std::cout<<t4->getBatteryCapacity();
+std::cout<<tayota->getBatteryCapacity();
 delete t; delete t2; delete t3; delete t4;
 delete tayota;
 return 0;
