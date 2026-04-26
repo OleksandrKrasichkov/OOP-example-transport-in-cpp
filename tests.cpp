@@ -7,6 +7,10 @@ void test_Toyota()
 {
         Toyota t;
         assert (t.getTypeOfFuel() == "Gasoline");
+        Toyota t1("Kerosene");
+        assert (t1.getTypeOfFuel() == "Kerosene");
+        t = t1;
+        assert (t.getTypeOfFuel() == "Kerosene");
         bool thrown = false;
         try{
                 Toyota t1("Crow",-10, -1);
@@ -21,7 +25,6 @@ void test_Toyota()
 int main()
 {
         test_Toyota();
-        Toyota t3("kaka");
 return 0;
 }
 
