@@ -241,13 +241,26 @@ class Helicopter: public AirTransport
 {
 private:
 public:
-        Helicopter(double amountOfFuel_=3000, double litersPerHour_=800,
+        Helicopter(double amountOfFuel_=600, double litersPerHour_=180,
         double maxSpeed_=250,
         int numberOfPassengers_=3,int numberOfPilots_=1)
         :AirTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
         numberOfPassengers_, numberOfPilots_){}
         
         void move() const override {std::cout<<"Helicopter flies 🚁"<<std::endl;}
+
+};
+class Ferry: public WaterTransport
+{
+private:
+public:
+        Ferry(double amountOfFuel_=5000, double litersPerHour_=150,
+        double maxSpeed_=35,
+        int numberOfPassengers_=200,int numberOfCrew_=12)
+        :WaterTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
+        numberOfPassengers_, numberOfCrew_){}
+        
+        void move() const override {std::cout<<"Ferry sails ⛴️ "<<std::endl;}
 
 };
 class Toyota: public Car
