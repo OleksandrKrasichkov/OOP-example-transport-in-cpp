@@ -91,6 +91,11 @@ public:
         {
                 throw std::runtime_error("This transport doesnt have personnel");
         }
+        
+        virtual double hoursBeforeEmpty() const
+        {
+                return (getAmountOfFuel() / getLitersPerHour());
+        }
         virtual void move() const {std::cout<<"Transport moves."<<std::endl;}
         virtual ~Transport(){}
 };
@@ -168,7 +173,9 @@ public:
                 else{throw std::runtime_error("Too few pilots");}
         }    
         double wageToPersonnel() const override
-        {return (numberOfPilots * getWage("Pilot"));} 
+        {return (numberOfPilots * getWage("Pilot"));}
+        //virtual ~AirTransport() {} dont have to write cause i have it in 
+        //Transport 
 };
 
 class WaterTransport: public Transport
@@ -223,7 +230,6 @@ public:
         virtual void setKWPerHour(double num)
         {throw std::runtime_error("This car doesn't run on electricity.");}
 
-        virtual ~Car() {}
 };
 class Jet: public AirTransport
 {
@@ -305,6 +311,10 @@ public:
                 if(num>=0){kWPerHour = num;}
                 else{throw std::runtime_error("Too low consumption.");}
         }
+        double hoursBeforeEmpty() const override
+        {
+                return (getBatteryCapacity() / getKWPerHour());
+        }
 };
                
 
@@ -312,15 +322,10 @@ public:
 
 
 
-double hoursBeforeEmpty(const Transport &);
         
 
 
 
-double hoursBeforeEmpty(const Transport &t)
-{
-        return t.getAmountOfFuel() / t.getLitersPerHour();
-}
 
 
 
