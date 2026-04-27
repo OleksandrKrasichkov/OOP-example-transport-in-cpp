@@ -38,6 +38,21 @@ void test_Tesla()
         assert(t2->wageToPersonnel() == 1000);
         delete t2;
 }
+void test_Jet()
+{ 
+        Jet t1;
+        assert(t1.getTypeOfFuel() == "Kerosene");
+        bool thrown = false;
+        try
+        {Jet t2(1, -1);}
+        catch (const std::runtime_error &e){thrown = true;}
+        assert(thrown);
+        AirTransport *t2 = new Jet();
+        assert(t2->hoursBeforeEmpty() - 3.75 < 0.01);
+        assert(t2->moneyPerTime(10)-16000 < 0.01);
+        assert(t2->wageToPersonnel() == 6000);
+        delete t2;
+}
 
 
 
@@ -48,6 +63,7 @@ int main()
 
         test_Toyota();
         test_Tesla();
+        test_Jet();
 return 0;
 }
 
