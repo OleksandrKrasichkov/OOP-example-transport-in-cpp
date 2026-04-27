@@ -24,7 +24,8 @@ private:
         std::unordered_map<std::string, double>wagesTable =
         {
                 {"Driver", 1000},
-                {"Pilot", 3000}
+                {"Pilot", 3000},
+                {"Crew", 1500}
         };
 public:
         Transport(std::string typeOfFuel_, double amountOfFuel_,
@@ -168,6 +169,32 @@ public:
         }    
         double wageToPersonnel() const override
         {return (numberOfPilots * getWage("Pilot"));} 
+};
+
+class WaterTransport: public Transport
+{
+private:
+        int numberOfCrew;
+public:
+        WaterTransport(double amountOfFuel_, double litersPerHour_,
+        double maxSpeed_,
+        int numberOfPassengers_,int numberOfCrew_)
+        :Transport("Diesel", amountOfFuel_, litersPerHour_, maxSpeed_,
+        numberOfPassengers_)
+        {
+                setNumberOfCrew(numberOfCrew_);
+        }
+        
+        int getNumberOfCrew() const {return numberOfCrew;}
+
+        void setNumberOfCrew(int num) 
+        {
+                if(num >=0)
+                {numberOfCrew = num;}
+                else {throw std::runtime_error("Too few crew members.");}
+        }
+        double wageToPersonnel() const override
+        {return (numberOfCrew * getWage("Crew"));}
 };
 
 class Car: public RoadTransportWithTires
