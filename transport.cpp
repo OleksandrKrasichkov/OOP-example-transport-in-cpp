@@ -165,7 +165,9 @@ public:
                 if(numberOfPilots_ >= 0) 
                 {numberOfPilots = numberOfPilots_;}
                 else{throw std::runtime_error("Too few pilots");}
-        }      
+        }    
+        double wageToPersonnel() const override
+        {return (numberOfPilots * getWage("Pilot"));} 
 };
 
 class Car: public RoadTransportWithTires
@@ -207,6 +209,19 @@ public:
         numberOfPassengers_, numberOfPilots_){}
         
         void move() const override {std::cout<<"Jet flies 🛩️"<<std::endl;}
+};
+class Helicopter: public AirTransport
+{
+private:
+public:
+        Helicopter(double amountOfFuel_=3000, double litersPerHour_=800,
+        double maxSpeed_=250,
+        int numberOfPassengers_=3,int numberOfPilots_=1)
+        :AirTransport(amountOfFuel_, litersPerHour_, maxSpeed_,
+        numberOfPassengers_, numberOfPilots_){}
+        
+        void move() const override {std::cout<<"Helicopter flies 🚁"<<std::endl;}
+
 };
 class Toyota: public Car
 {
