@@ -1,7 +1,5 @@
 #include "transport.cpp"
-#include <iostream>
 #include <cassert>
-#include <stdexcept>
 
 void test_Toyota()
 {
@@ -18,12 +16,20 @@ void test_Toyota()
                 thrown = true;
         }
         assert(thrown);
+        Car* t2 = new Toyota();
+        assert (t2->hoursBeforeEmpty() == 6.25);          
+        assert (t2->moneyPerTime(10) == 240);
+        assert (t2->wageToPersonnel() == 1000);
+
+        delete t2;
 }
 
 
 
 int main()
 {
+        std::cout<<std::fixed<<std::setprecision(2);
+
         test_Toyota();
 return 0;
 }
