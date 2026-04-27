@@ -21,6 +21,11 @@ private:
                 {"Electric", 1.1},
                 {"Kerosene", 2}
         };
+        std::unordered_map<std::string, double>wagesTable =
+        {
+                {"Driver", 1000},
+                {"Pilot", 3000}
+        };
 public:
         Transport(std::string typeOfFuel_, double amountOfFuel_,
         double litersPerHour_, double maxSpeed_,int numberOfPassengers_)
@@ -39,6 +44,8 @@ public:
         int getNumberOfPassengers() const {return numberOfPassengers;}
         double getFuelPrice(std::string type) const
         {return fuelPrices.at(type);}
+        double getWage(std::string type) const
+        {return wagesTable.at(type);}
         void setTypeOfFuel(std::string typeOfFuel_)
         {
                 if(std::find(allowedFuel.begin(),allowedFuel.end(),typeOfFuel_)
@@ -96,7 +103,10 @@ public:
         double litersPerHour_, double maxSpeed_,
         int numberOfPassengers_, int numberOfDrivers_)
         :Transport(typeOfFuel_,amountOfFuel_,litersPerHour_,
-        maxSpeed_, numberOfPassengers_), numberOfDrivers(numberOfDrivers_){}
+        maxSpeed_, numberOfPassengers_)
+        {
+                setNumberOfDrivers(numberOfDrivers_);
+        }
 
         int getNumberOfDrivers() const {return numberOfDrivers;}
 
@@ -105,6 +115,10 @@ public:
                 if(num >= 0)
                 {numberOfDrivers = num;}
                 else{throw std::runtime_error("Too few drivers");}
+        }
+        double wageToPersonnel() const override
+        {
+                return (numberOfDrivers * getWage("Driver"));
         }
 };
 
@@ -117,8 +131,10 @@ public:
         double litersPerHour_, double maxSpeed_,
         int numberOfPassengers_, int numberOfDrivers_, int numberOfTires_)
         :RoadTransport(typeOfFuel_,amountOfFuel_,litersPerHour_,
-        maxSpeed_, numberOfPassengers_, numberOfDrivers_),
-        numberOfTires(numberOfTires_){}
+        maxSpeed_, numberOfPassengers_, numberOfDrivers_)
+        {
+                setNumberOfTires(numberOfTires_);
+        }
         int getNumberOfTires() const {return numberOfTires;}             
         void setNumberOfTires(int numberOfTires_)
         {
