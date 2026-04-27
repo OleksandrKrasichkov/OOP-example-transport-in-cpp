@@ -79,6 +79,10 @@ public:
                 return ((time * litersPerHour) * fuelPrices.at(typeOfFuel));
         }
 
+        virtual double wageToPersonnel() const
+        {
+                throw std::runtime_error("This transport doesnt have personnel");
+        }
         virtual void move() const {std::cout<<"Transport moves."<<std::endl;}
         virtual ~Transport(){}
 };
@@ -86,19 +90,36 @@ public:
 class RoadTransport: public Transport
 {
 private:
-        int numberOfTires;
+        int numberOfDrivers;
 public:
         RoadTransport(std::string typeOfFuel_, double amountOfFuel_,
         double litersPerHour_, double maxSpeed_,
-        int numberOfPassengers_, int numberOfTires_)
+        int numberOfPassengers_, int numberOfDrivers_)
         :Transport(typeOfFuel_,amountOfFuel_,litersPerHour_,
-        maxSpeed_, numberOfPassengers_)
+        maxSpeed_, numberOfPassengers_), numberOfDrivers(numberOfDrivers_){}
+
+        int getNumberOfDrivers() const {return numberOfDrivers;}
+
+        void setNumberOfDrivers(int num)
         {
-                setNumberOfTires(numberOfTires_);
+                if(num >= 0)
+                {numberOfDrivers = num;}
+                else{throw std::runtime_error("Too few drivers");}
         }
+};
 
+class RoadTransportWithTires: public RoadTransport
+{
+private:
+        int numberOfTires;
+public:
+        RoadTransportWithTires(std::string typeOfFuel_, double amountOfFuel_,
+        double litersPerHour_, double maxSpeed_,
+        int numberOfPassengers_, int numberOfDrivers_, int numberOfTires_)
+        :RoadTransport(typeOfFuel_,amountOfFuel_,litersPerHour_,
+        maxSpeed_, numberOfPassengers_, numberOfDrivers_),
+        numberOfTires(numberOfTires_){}
         int getNumberOfTires() const {return numberOfTires;}             
-
         void setNumberOfTires(int numberOfTires_)
         {
                 if(numberOfTires_ >= 0)
@@ -131,15 +152,15 @@ public:
         }      
 };
 
-class Car: public RoadTransport
+class Car: public RoadTransportWithTires
 {
 private:
 
 public:
         Car(std::string typeOfFuel_, double amountOfFuel_, double litersPerHour_,
         double maxSpeed_, int numberOfPassengers_)
-        :RoadTransport(typeOfFuel_,amountOfFuel_, litersPerHour_, 
-        maxSpeed_, numberOfPassengers_,4){}
+        :RoadTransportWithTires(typeOfFuel_,amountOfFuel_, litersPerHour_, 
+        maxSpeed_, numberOfPassengers_,1,4){}
 
         virtual bool isElectric() const {return false;}
         virtual double getBatteryCapacity() const 
