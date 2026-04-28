@@ -1,6 +1,6 @@
 #include "transport.cpp"
 #include <cassert>
-
+#include <cmath>
 void test_Toyota()
 {
         Toyota t;
@@ -38,8 +38,8 @@ void test_Tesla()
         catch (const std::runtime_error &e){thrown = true;}
         assert(thrown);
         Car *t2 = new Tesla();
-        assert(t2->hoursBeforeEmpty() - 4.44 < 0.01);
-        assert(t2->moneyPerTime(10)-198 < 0.01);
+        assert(std::abs(t2->hoursBeforeEmpty() - 4.44) < 0.01);
+        assert(std::abs(t2->moneyPerTime(10)-198) < 0.01);
         assert(t2->wageToPersonnel() == 1000);
         delete t2;
 }
@@ -58,8 +58,8 @@ void test_Jet()
         catch (const std::runtime_error &e){thrown = true;}
         assert(thrown);
         AirTransport *t2 = new Jet();
-        assert(t2->hoursBeforeEmpty() - 3.75 < 0.01);
-        assert(t2->moneyPerTime(10)-16000 < 0.01);
+        assert(std::abs(t2->hoursBeforeEmpty() - 3.75) < 0.01);
+        assert(std::abs(t2->moneyPerTime(10)-16000) < 0.01);
         assert(t2->wageToPersonnel() == 6000);
         delete t2;
 }
@@ -78,8 +78,8 @@ void test_Helicopter()
         catch (const std::runtime_error &e){thrown = true;}
         assert(thrown);
         AirTransport *t2 = new Helicopter();
-        assert(t2->hoursBeforeEmpty() - 3.75 < 0.01);
-        assert(t2->moneyPerTime(10)-16000 < 0.01);
+        assert(std::abs(t2->hoursBeforeEmpty() - 3.33) < 0.01);
+        assert(std::abs(t2->moneyPerTime(10)-3600) < 0.01);
         assert(t2->wageToPersonnel() == 3000);
         delete t2;
 }
@@ -99,9 +99,9 @@ void test_Ferry()
         catch (const std::runtime_error &e){thrown = true;}
         assert(thrown);
         WaterTransport *t2 = new Ferry();
-        assert(t2->hoursBeforeEmpty() - 33.33 < 0.01);
-        assert(t2->moneyPerTime(10)-5250 < 0.01);
-        assert(t2->wageToPersonnel()-18000 < 0.01);
+        assert(std::abs(t2->hoursBeforeEmpty() - 33.33) < 0.01);
+        assert(std::abs(t2->moneyPerTime(10)-5250) < 0.01);
+        assert(std::abs(t2->wageToPersonnel()-18000) < 0.01);
         delete t2;
 }
 

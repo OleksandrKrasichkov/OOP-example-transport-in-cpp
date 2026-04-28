@@ -2,6 +2,10 @@
 
 int main()
 {
+        std::cout<<std::fixed<<std::setprecision(2);
+
+        Car *t10 = new Tesla();
+        std::cout<<t10->moneyPerTime(10);
         double totalBatteryCapacity = 0;
         std::vector<Car *> garage = {};
         Car *t = new Toyota();

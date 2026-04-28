@@ -98,7 +98,7 @@ public:
                 return (getAmountOfFuel() / getLitersPerHour());
         }
         virtual void move() const {std::cout<<"Transport moves."<<std::endl;}
-        virtual ~Transport(){}
+        virtual ~Transport() {}
 };
 
 class RoadTransport: public Transport
